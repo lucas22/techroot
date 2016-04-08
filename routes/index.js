@@ -3,7 +3,7 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'TECH_ROOT' });
+  res.render('index', {app_name: 'techroot'});
 });
 
 module.exports = router;
