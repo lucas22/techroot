@@ -1,36 +1,42 @@
-body {
-    padding: 2em;
-    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-    background: #10486b url("../images/main_bkgr_min.png") no-repeat center center;
+html {
+    height: 100%;
 }
+body {
+    /*background:  url("../images/main_bkgr_min.png") no-repeat center center;*/
 
+    background: -moz-linear-gradient(135deg, #3d7aa4 0%, #1a5378 100%); /* ff3.6+ */
+    background: -webkit-gradient(linear, left top, right bottom, color-stop(0%, #1a5378), color-stop(100%, #3d7aa4)); /* safari4+,chrome */
+    background: -webkit-linear-gradient(135deg, #3d7aa4 0%, #1a5378 100%); /* safari5.1+,chrome10+ */
+    background: -o-linear-gradient(135deg, #3d7aa4 0%, #1a5378 100%); /* opera 11.10+ */
+    background: -ms-linear-gradient(135deg, #3d7aa4 0%, #1a5378 100%); /* ie10+ */
+    background: linear-gradient(315deg, #3d7aa4 0%, #1a5378 100%); /* w3c */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#1a5378', endColorstr='#3d7aa4', GradientType=1); /* ie6-9 */
+    background-repeat: no-repeat;
+    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
 #wrapper {
+    padding: 2em;
     text-align: center;
 }
-
 #login_form {
     margin: 0 auto;
     width: 200px;
 }
-
 #login_form input {
     text-align: center;
     width: 10em;
     padding: 0.2em;
     margin: 0.5em;
 }
-
 #login_form #btn_login {
     width: 80px;
 }
-
 #home_title {
     font-size: xx-large;
     font-family: "Courier 10 Pitch", sans-serif;
     color: white;
     text-shadow: black 1px 1px 2px;
 }
-
 #welcome_text {
     color: white;
     text-shadow: black 1px 1px 2px;

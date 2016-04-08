@@ -1,0 +1,25 @@
+doctype html
+html
+	head
+		title= "Profile"
+		link(rel='stylesheet', href='/stylesheets/profile.css')
+		script(type='text/javascript' src='https://code.jquery.com/jquery-2.2.3.min.js')
+		script(type='text/javascript' src='javascripts/auth.js')
+
+	body
+		div(id='wrapper')
+			div(class='Box' id='profile_header')
+				img(id='profile_pic' src='/images/silvio.png')
+				h1(id="profile_name") Sílvio Santos
+			div(class='Wall' id='profile_wall')
+				div(class='Tile' id='tile000')
+					p "Oe, oee, podeixar" kkkkkk
+					video(controls class='Wallvid' id='vidSilvio000' src='/videos/silvio.mp4')
+						p Please, use a decent browser
+				div(class='Tile' id='tile001')
+					p "Vem pra cá, vem pra cá."
+						br
+						| - Santos, Silvio
+				div(class='Tile' id='tile002')
+					p E o bambu?
+					img(class='Wallpic' id='picSilvio002' src='/images/panda.jpg')
