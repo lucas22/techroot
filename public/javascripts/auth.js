@@ -8,8 +8,9 @@ $(document).ready(function () {
     $("#btn_login").click(function (e) {
         e.preventDefault();         // comment this to release
         // TODO: login w/ firebase
-        alert("Login attempt!")
-        ref2.authWithPassword({
+        var email = $("#txt_email").val();
+        var password =$("#txt_pass").val();
+        ref.authWithPassword({
             "email": email,
             "password": password
         }, function (error, authData) {
@@ -41,7 +42,13 @@ $(document).ready(function () {
         // TODO: create user in firebase
         $("#signup_submit_but").on("click", function (e) {
             e.preventDefault();
-            if($("#txt_user").val() =='' || $("#signup_name").val()==''){
+            //if the nick is not set
+            var nick = "";
+            nick = $("#signup_nick").val();
+            if (nick === undefined)
+                nick = "";
+
+            if($("#txt_email").val() =='' || $("#signup_name").val()==''){
                 alert("The email and name must be filled")
                 return null;
             }
@@ -58,7 +65,7 @@ $(document).ready(function () {
             var message_signup = {};
 
             message_signup = {
-                email: $("#txt_user").val(),
+                email: $("#txt_email").val(),
                 password: $("#txt_pass").val()
             };
 
@@ -83,15 +90,11 @@ $(document).ready(function () {
                     };
                     ref.child("Users/" + userData.uid).set(message_signup2);
                     console.log("Successfully created user account with uid:", userData.uid);
+                    window.location.href = "/profile"
                 }
             });
 
 
-            //if the nick is not set
-            var nick = "";
-            nick = $("#signup_nick").val();
-            if (nick === undefined)
-                nick = "";
 
         });
 

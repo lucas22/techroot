@@ -1,0 +1,67 @@
+html {
+    height: 100%;
+}
+
+body {
+}
+
+#wrapper {
+    padding: 2em;
+    text-align: center;
+}
+
+.Box_wall {
+    background-color: #1a5378;
+    margin: 1em auto;
+    border-radius: 5px;
+    width: 1000px;
+    height: 160px;
+}
+
+.Wall {
+    background-color: gray;
+    margin: 1em auto;
+    border-radius: 5px;
+    width: 1000px;
+    height: auto;
+}
+
+.Tile {
+    box-shadow: #dadada -1px 1px 4px;
+    background-color: #fefefe;
+    border-radius: 5px;
+    width: 48%;
+    float: left;
+    display: block;
+    margin: 1% 1%;
+}
+
+#profile_name {
+    padding: 0.5em;
+    font-size: xx-large;
+    font-family: "Ubuntu", sans-serif;
+    color: white;
+    text-shadow: black 1px 1px 2px;
+}
+
+#profile_pic {
+    float: left;
+    margin: 10px;
+    width: 140px;
+    height: auto;
+    border-radius: 5px;
+    border: #ddd solid 1px;
+}
+
+.Tile p {
+    text-align: left;
+    margin: 3%;
+}
+
+.Wallpic {
+    width: 95%
+}
+
+.Wallvid {
+    width: 95%
+}

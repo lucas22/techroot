@@ -4,7 +4,7 @@ block home_page_content
 	h1(id='home_title')= "> " + app_name
 	p(id='welcome_text') Welcome to #{app_name}
 	form(id="login_form")
-		input(id='txt_user', type="text", placeholder="user", required)
+		input(id='txt_email', type="text", placeholder="user", required)
 		input(id='txt_pass', type="password", placeholder="****", required)
 		input(id='btn_login', type="submit", value="brute force")
 	a(id="link_signup" href="#") add me
