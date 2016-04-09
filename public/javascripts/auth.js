@@ -18,7 +18,7 @@ $(document).ready(function () {
 
     $("#btn_login").click(function (e) {
         e.preventDefault();         // comment this to release
-        // TODO: login w/ firebase
+
         var email = $("#txt_email").val();
         var password =$("#txt_pass").val();
         ref.authWithPassword({
@@ -27,6 +27,7 @@ $(document).ready(function () {
         }, function (error, authData) {
             if (error) {
                 console.log("Login Failed!", error);
+                alert("Login Failed: " + error);
             } else {
                 console.log("Authenticated successfully with payload:", authData);
                 // If successful, send user to wall page:
@@ -37,40 +38,43 @@ $(document).ready(function () {
 
     $("#link_signup").click(function (e) {
         e.preventDefault();
-        // TODO: create signup form fields
+
         $("#link_signup").hide();
         $("#btn_login").hide();
-        $("#login_form").append("<input id='confirm_pass' type='password' placeholder='****' required/>" +
-            "<input id='signup_name' type='text' placeholder='Your name' required/>" +
-            "<input id='signup_nick' type='text' placeholder='nickname'/>" +
-            "<input type='radio' name='gender' value='male'/>Male" +
-            "<input type='radio' name='gender' value='female'/>Female" +
-            "<input type='radio' name='gender' value='other'/>Other" +
+        $("#login_form").append("<input id='confirm_pass' type='password' placeholder='retype pass' required/>" +
+            "<input id='signup_name' type='text' placeholder='real name (or not)' required/>" +
+            "<input id='signup_nick' type='text' placeholder='geek name'/>" +
+            "<input style='vertical-align: middle' type='radio' name='gender' value='male'/>Male" +
+            "<input class='radio' type='radio' name='gender' value='female'/>Female" +
+            "<input checked='' class='radio' type='radio' name='gender' value='none'/>Undecided" +
             "<input id='signup_submit_but' type='submit'/>"
         );
 
-        //alert("Signup attempt!");
-        // TODO: create user in firebase
         $("#signup_submit_but").on("click", function (e) {
             e.preventDefault();
-            //if the nick is not set
+
+            clearPasswords = function () {
+                $("#txt_pass").val("");
+                $("#confirm_pass").val("");
+            };
             var nick = "";
             nick = $("#signup_nick").val();
             if (nick === undefined)
                 nick = "";
 
             if($("#txt_email").val() =='' || $("#signup_name").val()==''){
-                alert("The email and name must be filled")
+                alert("The email and name must be filled");
+                clearPasswords();
                 return null;
             }
             if ($("#txt_pass").val() !== $("#confirm_pass").val()) {
                 alert("Passwords do not match!");
+                clearPasswords();
                 return null;
             }
             if(!$("#txt_pass").val().match(/^(?=.*[0-9])(?=.*[a-z])([a-zA-Z0-9]{8,})$/)){
                 alert("Password must contain at least one number, only alphanumerical characters, and 8 characters");
-                $("#txt_pass").val("");
-                $("#confirm_pass").val("");
+                clearPasswords();
                 return null;
             }
             var message_signup = {};
@@ -104,8 +108,6 @@ $(document).ready(function () {
                     window.location.href = "/profile"
                 }
             });
-
-
 
         });
 
