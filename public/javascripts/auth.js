@@ -5,6 +5,17 @@
 $(document).ready(function () {
     var ref = new Firebase("https://techroot.firebaseio.com/");
 
+    $("#btn_login_google").on("click", function(e){
+        ref.authWithOAuthPopup("google", function(error, authData) {
+            if (error) {
+                console.log("Login Failed!", error);
+            } else {
+                console.log("Authenticated successfully with payload:", authData);
+                window.location.href = "/wall"
+            }
+        });
+    });
+
     $("#btn_login").click(function (e) {
         e.preventDefault();         // comment this to release
         // TODO: login w/ firebase
