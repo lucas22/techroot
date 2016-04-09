@@ -9,9 +9,18 @@ $(document).ready(function () {
         e.preventDefault();         // comment this to release
         // TODO: login w/ firebase
         alert("Login attempt!")
-
-        // If successful, send user to wall page:
-        window.location.href = "/wall"
+        ref2.authWithPassword({
+            "email": email,
+            "password": password
+        }, function (error, authData) {
+            if (error) {
+                console.log("Login Failed!", error);
+            } else {
+                console.log("Authenticated successfully with payload:", authData);
+                // If successful, send user to wall page:
+                window.location.href = "/wall"
+            }
+        });
     });
 
     $("#link_signup").click(function (e) {
@@ -19,8 +28,8 @@ $(document).ready(function () {
         // TODO: create signup form fields
         $("#link_signup").hide();
         $("#btn_login").hide();
-        $("#login_form").append("<input id='confirm_pass' type='password' placeholder='****' />" +
-            "<input id='signup_name' type='text' placeholder='Your name' />" +
+        $("#login_form").append("<input id='confirm_pass' type='password' placeholder='****' required/>" +
+            "<input id='signup_name' type='text' placeholder='Your name' required/>" +
             "<input id='signup_nick' type='text' placeholder='nickname'/>" +
             "<input type='radio' name='gender' value='male'/>Male" +
             "<input type='radio' name='gender' value='female'/>Female" +
@@ -32,11 +41,20 @@ $(document).ready(function () {
         // TODO: create user in firebase
         $("#signup_submit_but").on("click", function (e) {
             e.preventDefault();
-
+            if($("#txt_user").val() =='' || $("#signup_name").val()==''){
+                alert("The email and name must be filled")
+                return null;
+            }
             if ($("#txt_pass").val() !== $("#confirm_pass").val()) {
                 alert("Passwords do not match!");
+                return null;
             }
-
+            if(!$("#txt_pass").val().match(/^(?=.*[0-9])(?=.*[a-z])([a-zA-Z0-9]{8,})$/)){
+                alert("Password must contain at least one number, only alphanumerical characters, and 8 characters");
+                $("#txt_pass").val("");
+                $("#confirm_pass").val("");
+                return null;
+            }
             var message_signup = {};
 
             message_signup = {
@@ -74,9 +92,6 @@ $(document).ready(function () {
             nick = $("#signup_nick").val();
             if (nick === undefined)
                 nick = "";
-
-
-            console.log(message_signup)
 
         });
 
