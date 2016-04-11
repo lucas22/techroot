@@ -36,18 +36,24 @@ $(document).ready(function () {
         });
     });
 
-    $("#link_signup").click(function (e) {
+    $("#btn_signup").click(function (e) {
         e.preventDefault();
 
-        $("#link_signup").hide();
+        $("#btn_signup").hide();
         $("#btn_login").hide();
-        $("#login_form").append("<input id='confirm_pass' type='password' placeholder='retype pass' required/>" +
-            "<input id='signup_name' type='text' placeholder='real name (or not)' required/>" +
-            "<input id='signup_nick' type='text' placeholder='geek name'/>" +
-            "<input style='vertical-align: middle' type='radio' name='gender' value='male'/>Male" +
-            "<input class='radio' type='radio' name='gender' value='female'/>Female" +
-            "<input checked='' class='radio' type='radio' name='gender' value='none'/>Undecided" +
-            "<input id='signup_submit_but' type='submit'/>"
+        $("#btn_login_google").hide();
+        $("#login_form").append("<input class='Txt_input' id='confirm_pass' type='password' placeholder='retype pass' required/>" +
+            "<input class='Txt_input' id='signup_name' type='text' placeholder='real name (or not)' required/>" +
+            "<input style='margin-bottom: 1em;' class='Txt_input' id='signup_nick' type='text' placeholder='geek name'/>" +
+            "<div id='radio_btns'>" +
+            "<input class='Radio' type='radio' name='gender' value='male'/>" +
+            "<label for='male'>Male</label>" +
+            "<input class='Radio' type='radio' name='gender' value='female'/>" +
+            "<label for='female'>Female</label>" +
+            "<input class='Radio' checked='' type='radio' name='gender' value='none'/>" +
+            "<label for='none'>Undecided</label>" +
+            "</div>" +
+            "<input class='Btn_login' id='signup_submit_but' type='submit' value='add me!'/>"
         );
 
         $("#signup_submit_but").on("click", function (e) {
@@ -99,6 +105,7 @@ $(document).ready(function () {
                 } else {
                     console.log("Successfully created user account with uid:", userData.uid);
                     var message_signup2 = {
+                        email: $("#txt_email").val(),
                         name: $("#signup_name").val(),
                         nick: nick,
                         gender: $("input[name='gender']:checked").val()
@@ -110,9 +117,6 @@ $(document).ready(function () {
             });
 
         });
-
-        // If successful, send user to profile page:
-        // window.location.href = "/profile"
     });
 
 });

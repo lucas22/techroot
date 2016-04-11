@@ -1,12 +1,11 @@
 extends home
 
 block home_page_content
-	h1(id='home_title')= "> " + app_name
-	p(id='welcome_text') Welcome to #{app_name}
+	h1(id='home_title')= "> " + title
+	p(id='welcome_text') Welcome to #{title}
 	form(id="login_form")
-		input(id='txt_email', type="text", placeholder="e-mail", required)
-		input(id='txt_pass', type="password", placeholder="****", required)
-		input(id='btn_login', type="submit", value="brute force")
-		input(id='btn_login_google', type="submit", value="google")
-
-	a(id="link_signup" href="#") add me
+		input(class='Txt_input', id='txt_email', type="text", placeholder="e-mail", required)
+		input(class='Txt_input', id='txt_pass', type="password", placeholder="****", required)
+		input(class='Btn_login', id='btn_login', type="submit", value="brute force")
+		input(class='Btn_login', id='btn_signup', type="submit", value="add user")
+		input(class='Btn_login', id='btn_login_google', type="submit", value="")

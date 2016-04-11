@@ -14,7 +14,11 @@ module.exports = function(grunt) {
                     pretty: true,
                 },
                 files: {
-                    'public/index.html': 'views/index.jade'
+                    'public/index.html': 'views/index.jade',
+                    'public/profile.html': 'views/profile.jade',
+                    'public/wall.html': 'views/wall.jade',
+                    'public/error.html': 'views/error.jade',
+                    'public/home.html': 'views/home.jade'
                 }
             }
         }
