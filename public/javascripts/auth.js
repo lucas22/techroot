@@ -16,6 +16,18 @@ $(document).ready(function () {
         });
     });
 
+    $("#btn_login_github").on("click", function (e) {
+        var ref = new Firebase("https://techroot.firebaseio.com");
+        ref.authWithOAuthPopup("github", function (error, authData) {
+            if (error) {
+                console.log("Login Failed!", error);
+            } else {
+                console.log("Authenticated successfully with payload:", authData);
+                window.location.href = "/wall"
+            }
+        });
+    });
+
     $("#btn_login").click(function (e) {
         e.preventDefault();         // comment this to release
 
