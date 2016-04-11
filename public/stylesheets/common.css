@@ -32,7 +32,7 @@
 .Button {
     text-align: center;
     margin: 0.5em;
-    width: 135px;
+    width: 120px;
     background: #ffffff;
     background-image: -webkit-linear-gradient(top, #ffffff, #aabed6);
     background-image: -moz-linear-gradient(top, #ffffff, #aabed6);
@@ -47,7 +47,7 @@
     font-family: Ubuntu, "Courier New", sans-serif;
     color: #00282d;
     font-size: 16px;
-    padding: 10px;
+    padding: 7px;
     text-decoration: none;
 }
 
