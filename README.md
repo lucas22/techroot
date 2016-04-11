@@ -7,5 +7,5 @@
  - Node.js
  - npm
  - Several Node.js packages:
-	 - run `npm install` in root directory to install all listed in `packages.json` 
+	 - run `npm install` in root directory to install all listed in `/package.json` 
 
