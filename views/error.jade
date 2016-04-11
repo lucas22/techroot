@@ -1,6 +1,7 @@
 extends home
 
 block content
-  h1= message
-  h2= error.status
-  pre #{error.stack}
+  div(class='Error')
+    h1= "Error " + error.status + ": "
+    h2= message
+    pre #{error.stack}

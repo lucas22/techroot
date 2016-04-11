@@ -53,7 +53,7 @@ $(document).ready(function () {
             "<input class='Radio' checked='' type='radio' name='gender' value='none'/>" +
             "<label for='none'>Undecided</label>" +
             "</div>" +
-            "<input class='Btn_login' id='signup_submit_but' type='submit' value='add me!'/>"
+            "<input class='Button' id='signup_submit_but' type='submit' value='add me!'/>"
         );
 
         $("#signup_submit_but").on("click", function (e) {

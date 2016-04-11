@@ -15,61 +15,12 @@ body {
     font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
-.Btn_login {
-    text-align: center;
-    margin: 0.5em;
-    width: 135px;
-    background: #ffffff;
-    background-image: -webkit-linear-gradient(top, #ffffff, #aabed6);
-    background-image: -moz-linear-gradient(top, #ffffff, #aabed6);
-    background-image: -ms-linear-gradient(top, #ffffff, #aabed6);
-    background-image: -o-linear-gradient(top, #ffffff, #aabed6);
-    background-image: linear-gradient(to bottom, #ffffff, #aabed6);
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    border-radius: 5px;
-    border-style: none;
-    text-shadow: 1px 1px 3px #ffffff;
-    font-family: Ubuntu, "Courier New", sans-serif;
-    color: #00282d;
-    font-size: 16px;
-    padding: 10px;
-    text-decoration: none;
-}
-
-.Btn_login:hover {
-    background: #d9f0ff;
-    background-image: -webkit-linear-gradient(top, #d9f0ff, #568eb3);
-    background-image: -moz-linear-gradient(top, #d9f0ff, #568eb3);
-    background-image: -ms-linear-gradient(top, #d9f0ff, #568eb3);
-    background-image: -o-linear-gradient(top, #d9f0ff, #568eb3);
-    background-image: linear-gradient(to bottom, #d9f0ff, #568eb3);
-    text-decoration: none;
-}
-
-.Txt_input {
-    text-align: center;
-    width: 120px;
-    padding: 0.2em;
-    margin: 0.5em;
-}
-
-.Radio {
-    float: left;
-    margin: 0.5em 0 0.5em 10%;
-    width: 15%;
-}
-
 #btn_login_google {
     background: url("../images/icons/btn_google_signin_light_normal_web.png") no-repeat scroll 0 0 transparent;
     background-size: 191px 46px;
     width: 191px;
     height: 46px;
     border: none;
-}
-#wrapper {
-    padding: 2em;
-    text-align: center;
 }
 #login_form {
     color: white;
@@ -78,14 +29,12 @@ body {
     margin: 0 auto;
     width: 200px;
 }
-
 #login_form label {
     width: 70%;
     text-align: left;
     float: left;
     margin: 0.5em 0 0.5em 0;
 }
-
 #radio_btns {
     width: 100%;
 }

@@ -1,0 +1,94 @@
+#wrapper {
+    padding: 2em;
+    text-align: center;
+}
+
+.Box {
+    background-color: #1a5378;
+    margin: 1em auto;
+    border-radius: 5px;
+    width: 1000px;
+    height: 160px;
+}
+
+.Wall {
+    background-color: gray;
+    margin: 1em auto;
+    border-radius: 5px;
+    width: 1000px;
+    height: auto;
+}
+
+.Tile {
+    box-shadow: #dadada -1px 1px 4px;
+    background-color: #fefefe;
+    border-radius: 5px;
+    width: 48%;
+    float: left;
+    display: block;
+    margin: 1% 1%;
+}
+
+.Button {
+    text-align: center;
+    margin: 0.5em;
+    width: 135px;
+    background: #ffffff;
+    background-image: -webkit-linear-gradient(top, #ffffff, #aabed6);
+    background-image: -moz-linear-gradient(top, #ffffff, #aabed6);
+    background-image: -ms-linear-gradient(top, #ffffff, #aabed6);
+    background-image: -o-linear-gradient(top, #ffffff, #aabed6);
+    background-image: linear-gradient(to bottom, #ffffff, #aabed6);
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    border-style: none;
+    text-shadow: 1px 1px 3px #ffffff;
+    font-family: Ubuntu, "Courier New", sans-serif;
+    color: #00282d;
+    font-size: 16px;
+    padding: 10px;
+    text-decoration: none;
+}
+
+.Button:hover {
+    background: #d9f0ff;
+    background-image: -webkit-linear-gradient(top, #d9f0ff, #568eb3);
+    background-image: -moz-linear-gradient(top, #d9f0ff, #568eb3);
+    background-image: -ms-linear-gradient(top, #d9f0ff, #568eb3);
+    background-image: -o-linear-gradient(top, #d9f0ff, #568eb3);
+    background-image: linear-gradient(to bottom, #d9f0ff, #568eb3);
+    text-decoration: none;
+}
+
+.Txt_input {
+    text-align: center;
+    width: 120px;
+    padding: 0.2em;
+    margin: 0.5em;
+}
+
+.Radio {
+    float: left;
+    margin: 0.5em 0 0.5em 10%;
+    width: 15%;
+}
+
+.Tile p {
+    text-align: left;
+    margin: 3%;
+}
+
+.Wallpic {
+    width: 95%
+}
+
+.Wallvid {
+    width: 95%
+}
+
+.Error {
+    background-color: white;
+    color: red;
+    padding: 2em;
+}
