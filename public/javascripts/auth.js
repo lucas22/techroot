@@ -2,14 +2,10 @@
  * Created by lucas on 4/8/16.
  */
 
-var ref = new Firebase("https://techroot.firebaseio.com/");
-
-// Returns true if required data are ok
+// Returns true if required data is ok
 var processForm = function (mail, pw) {
     var confirmPass = $("#confirm_pass");
     ok = true;
-    console.log(pw);
-    console.log(confirmPass.val());
     if (pw !== confirmPass.val()) {
         alert("Passwords do not match!");
         ok = false;
@@ -31,30 +27,37 @@ var processForm = function (mail, pw) {
 };
 
 // Does the login given a target API as parameter (google or github)
-var loginAPI = function (target) {
+var loginAPI = function (ref, target) {
     ref.authWithOAuthPopup(target, function (error, authData) {
         if (error) {
             console.warn("Login Failed!", error);
-        } else {
-            console.log("Authenticated successfully with payload:", authData);
-            window.location.href = "/wall"
+            return undefined;
         }
+        console.log("Authenticated successfully with payload:", authData);
+        window.location.href = "/wall"
+        return authData;
     });
 };
 
 $(document).ready(function () {
 
+    var ref = new Firebase("https://techroot.firebaseio.com/");
+
     // Google authentication
     $("#btn_login_google").on("click", function () {
-        loginAPI("google");
+        if (loginAPI(ref, "google")) {
+            console.warn("Google login has failed.");
+        }
     });
 
     // Github authentication
     $("#btn_login_github").on("click", function () {
-        loginAPI("github");
+        if (loginAPI(ref, "github")) {
+            console.warn("Github login has failed.");
+        }
     });
 
-    // Standard Firebase authentication
+    // Standard Firebase login
     $("#btn_login").click(function (e) {
         e.preventDefault();
         var user_mail = $("#txt_email").val();
@@ -74,14 +77,9 @@ $(document).ready(function () {
         });
     });
 
+    // Firebase signup
     $("#btn_signup").click(function (e) {
-        var user_mail = $("#txt_email").val();
-        var passwd = $("#txt_pass").val();
         e.preventDefault();
-        $("#btn_signup").hide();
-        $("#btn_login").hide();
-        $("#btn_login_google").hide();
-        $("#btn_login_github").hide();
 
         var signupFormString = "<div id='signup_form'><input class='Txt_input' id='confirm_pass' type='password' placeholder='retype pass' required/>" +
             "<input class='Txt_input' id='signup_name' type='text' placeholder='real name (or not)' required/>" +
@@ -94,11 +92,17 @@ $(document).ready(function () {
             "<input class='Radio' checked='' type='radio' name='gender' value='none'/>" +
             "<label for='none'>Undecided</label>" +
             "</div>" +
-            "<input class='Button' id='signup_submit_btn' type='submit' value='add me!'/>" +
+            "<input class='Button' id='signup_submit_but' type='submit' value='add me!'/>" +
             "<input class='Button' id='cancel_signup_btn' type='button' value='cancel'/></div>";
 
+        // build signin form
+        $("#btn_signup").hide();
+        $("#btn_login").hide();
+        $("#btn_login_google").hide();
+        $("#btn_login_github").hide();
         $("#login_form").append(signupFormString);
 
+        // restore login form
         $("#cancel_signup_btn").on("click", function (e) {
             $("#signup_form").empty().remove();
             $("#btn_signup").show();
@@ -109,26 +113,25 @@ $(document).ready(function () {
 
         $("#signup_submit_but").on("click", function (e) {
             e.preventDefault();
+            var user_mail = $("#txt_email").val();
+            var passwd = $("#txt_pass").val();
 
-            // check required fields. Returns true if ok
             console.log("PASSING: " + passwd);
             if (!processForm(user_mail, passwd)) {
                 console.log("Invalid data");
                 return false;
             }
 
-            var nick = "";
-            nick = $("#signup_nick").val();
-            if (nick === undefined)
-                nick = "";
+            // TODO: test this statement:
+            var nick = $("#signup_nick").val() | "";
+            console.log("NICK: " + nick + " EON");
 
-            var message_signup = {
+            var user_identification = {
                 email: user_mail,
                 password: passwd
             };
 
-            console.warn("Warning FAKE");
-            ref.createUser(message_signup, function (error, userData) {
+            ref.createUser(user_identification, function (error, userData) {
                 if (error) {
                     switch (error.code) {
                         case "EMAIL_TAKEN":
@@ -140,20 +143,38 @@ $(document).ready(function () {
                         default:
                             console.warn("Error creating user:", error);
                     }
-                } else {
-                    console.log("Successfully created user account with uid:", userData.uid);
-                    var message_signup2 = {
-                        email: user_mail,
-                        name: $("#signup_name").val(),
-                        nick: nick,
-                        gender: $("input[name='gender']:checked").val()
-                    };
-                    ref.child("Users/" + userData.uid).set(message_signup2);
-                    window.location.href = "/profile"
+                    return undefined;
                 }
+                console.log("Successfully created user account with uid:", userData.uid);
+                var user_info = {
+                    email: user_mail,
+                    name: $("#signup_name").val(),
+                    nick: nick,
+                    gender: $("input[name='gender']:checked").val()
+                };
+                ref.child("users").child(userData.uid).set(user_info);
+                window.location.href = "/profile";
+                return userData;
             });
 
         });
     });
 
 });
+
+// run automated tests
+var test_auth = function () {
+    // testing valid emails and passwords
+    var confirm = $("#confirm_pass");
+
+    confirm.val("password");
+    assert(processForm("fake@mail.com", "password"), false);
+    assert(processForm("", "password"), false);
+    confirm.val("abcd1234");
+    assert(processForm("", "abcd1234"), false);
+    assert(processForm("fake@mail.com", "abcd1234"), true);
+    confirm.val("abcd-234");
+    assert(processForm("", "abcd-234"), false);
+    assert(processForm("fake@mail.com", "abcd-234"), false);
+
+};

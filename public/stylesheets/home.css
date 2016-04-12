@@ -2,8 +2,6 @@ html {
     height: 100%;
 }
 body {
-    /*background:  url("../images/main_bkgr_min.png") no-repeat center center;*/
-
     background: -moz-linear-gradient(135deg, #3d7aa4 0%, #1a5378 100%); /* ff3.6+ */
     background: -webkit-gradient(linear, left top, right bottom, color-stop(0%, #1a5378), color-stop(100%, #3d7aa4)); /* safari4+,chrome */
     background: -webkit-linear-gradient(135deg, #3d7aa4 0%, #1a5378 100%); /* safari5.1+,chrome10+ */
@@ -22,7 +20,6 @@ body {
     height: 46px;
     border: none;
 }
-
 #btn_login_github {
     background: url("../images/icons/btn_github_signin_light.png") no-repeat scroll 0 0 transparent;
     background-size: 191px 38px;
