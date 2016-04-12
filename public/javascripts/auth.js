@@ -2,8 +2,6 @@
  * Created by lucas on 4/8/16.
  */
 
-var ref = new Firebase("https://techroot.firebaseio.com/");
-
 // Returns true if required data are ok
 var processForm = function (mail, pw) {
     var confirmPass = $("#confirm_pass");
@@ -44,6 +42,8 @@ var loginAPI = function (target) {
 
 $(document).ready(function () {
 
+    var ref = new Firebase("https://techroot.firebaseio.com/");
+
     // Google authentication
     $("#btn_login_google").on("click", function () {
         loginAPI("google");
@@ -75,9 +75,8 @@ $(document).ready(function () {
     });
 
     $("#btn_signup").click(function (e) {
-        var user_mail = $("#txt_email").val();
-        var passwd = $("#txt_pass").val();
         e.preventDefault();
+
         $("#btn_signup").hide();
         $("#btn_login").hide();
         $("#btn_login_google").hide();
@@ -94,7 +93,7 @@ $(document).ready(function () {
             "<input class='Radio' checked='' type='radio' name='gender' value='none'/>" +
             "<label for='none'>Undecided</label>" +
             "</div>" +
-            "<input class='Button' id='signup_submit_btn' type='submit' value='add me!'/>" +
+            "<input class='Button' id='signup_submit_but' type='submit' value='add me!'/>" +
             "<input class='Button' id='cancel_signup_btn' type='button' value='cancel'/></div>";
 
         $("#login_form").append(signupFormString);
@@ -109,7 +108,8 @@ $(document).ready(function () {
 
         $("#signup_submit_but").on("click", function (e) {
             e.preventDefault();
-
+            var user_mail = $("#txt_email").val();
+            var passwd = $("#txt_pass").val();
             // check required fields. Returns true if ok
             console.log("PASSING: " + passwd);
             if (!processForm(user_mail, passwd)) {
@@ -148,7 +148,7 @@ $(document).ready(function () {
                         nick: nick,
                         gender: $("input[name='gender']:checked").val()
                     };
-                    ref.child("Users/" + userData.uid).set(message_signup2);
+                    ref.child("users").child(userData.uid).set(message_signup2);
                     window.location.href = "/profile"
                 }
             });
