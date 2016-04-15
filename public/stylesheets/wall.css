@@ -44,11 +44,18 @@ body {
     text-shadow: black 1px 1px 2px;
 }
 
-#profile_pic {
+.post_name {
+    padding: 0.9em;
+    font-size: x-large;
+    font-family: "Ubuntu", sans-serif;
+    color: blue;
+}
+
+.profile_pic {
     float: left;
     margin: 10px;
-    width: 140px;
-    height: auto;
+    width: 75px;
+    height: 75px;
     border-radius: 5px;
     border: #ddd solid 1px;
 }
