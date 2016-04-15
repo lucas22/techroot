@@ -2,7 +2,11 @@
  * Created by lucas on 4/8/16.
  */
 
+<<<<<<< HEAD
 // Returns true if required data is ok
+=======
+// Returns true if required data are ok
+>>>>>>> 6a05864f4421d218c8848a0c45c8aed71c4301ec
 var processForm = function (mail, pw) {
     var confirmPass = $("#confirm_pass");
     ok = true;
@@ -80,6 +84,14 @@ $(document).ready(function () {
     // Firebase signup
     $("#btn_signup").click(function (e) {
         e.preventDefault();
+<<<<<<< HEAD
+=======
+
+        $("#btn_signup").hide();
+        $("#btn_login").hide();
+        $("#btn_login_google").hide();
+        $("#btn_login_github").hide();
+>>>>>>> 6a05864f4421d218c8848a0c45c8aed71c4301ec
 
         var signupFormString = "<div id='signup_form'><input class='Txt_input' id='confirm_pass' type='password' placeholder='retype pass' required/>" +
             "<input class='Txt_input' id='signup_name' type='text' placeholder='real name (or not)' required/>" +
@@ -115,7 +127,11 @@ $(document).ready(function () {
             e.preventDefault();
             var user_mail = $("#txt_email").val();
             var passwd = $("#txt_pass").val();
+<<<<<<< HEAD
 
+=======
+            // check required fields. Returns true if ok
+>>>>>>> 6a05864f4421d218c8848a0c45c8aed71c4301ec
             console.log("PASSING: " + passwd);
             if (!processForm(user_mail, passwd)) {
                 console.log("Invalid data");
@@ -143,7 +159,20 @@ $(document).ready(function () {
                         default:
                             console.warn("Error creating user:", error);
                     }
+<<<<<<< HEAD
                     return undefined;
+=======
+                } else {
+                    console.log("Successfully created user account with uid:", userData.uid);
+                    var message_signup2 = {
+                        email: user_mail,
+                        name: $("#signup_name").val(),
+                        nick: nick,
+                        gender: $("input[name='gender']:checked").val()
+                    };
+                    ref.child("users").child(userData.uid).set(message_signup2);
+                    window.location.href = "/profile"
+>>>>>>> 6a05864f4421d218c8848a0c45c8aed71c4301ec
                 }
                 console.log("Successfully created user account with uid:", userData.uid);
                 var user_info = {
