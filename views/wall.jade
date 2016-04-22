@@ -4,58 +4,62 @@ html
 		title= "Wall"
 		link(rel='stylesheet', href='/stylesheets/common.css')
 		link(rel='stylesheet', href='/stylesheets/wall.css')
+		script(type='text/javascript' src='https://code.jquery.com/jquery-2.2.3.min.js')
+		script(type='text/javascript' src='javascripts/auth.js')
+		script(type="text/javascript" src="https://cdn.firebase.com/js/client/2.4.2/firebase.js")
 
 	body
 		div(id='wrapper')
 			div(class='Box_wall' id='profile_header')
 				h1(id="profile_name") Sílvio Santos
-			div(class='Wall' id='profile_wall')
-				div(class='Tile' id='tile000')
-					div(class='thumbnail')
-						img(class='profile_pic' src='/images/silvio.png')
-					p(class='post_name') Silvio Santos
-					p Hoje tem, hoje tem!
-					img(src='/images/aviao.jpg')
-				div(class='Tile' id='tile001')
-					div(class='thumbnail')
-						img(class='profile_pic' src='/images/mark.jpeg' )
-					p(class='post_name') Mark Zimmerberg
-					p This is way better than the Headbook
-				div(class='Tile' id='tile002')
-					div(class='thumbnail')
-						img(class='profile_pic' src='/images/Sorin.jpg')
-					p(class='post_name') Edward Sorin
-					p I have a great idea!! I'm going to build an university in the coldest place I can find!
-				div(class='Tile' id='tile003')
-					div(class='thumbnail')
-						img(class='profile_pic' src='/images/preto.jpg')
-					p(class='post_name') Darkness
-					p &#9835 Hello Darkness my old friend... &#9835
-					p &#9835 I've come to talk to you again.... &#9835
-				div(class='Tile' id='tile004')
-					div(class='thumbnail')
-						img(class='profile_pic' src='/images/dilma.jpg')
-					p(class='post_name') Dilmãe
-					p #naovaitergolpe
-				div(class='Tile' id='tile005')
-					div(class='thumbnail')
-						img(class='profile_pic' src='/images/aecio.jpg')
-					p(class='post_name') Aécio
-					p &#8592 Se ela cair, eu assumo?
-				div(class='Tile' id='tile006')
-					div(class='thumbnail')
-						img(class='profile_pic' src='/images/darksouls.jpg')
-					p(class='post_name') Dark Souls 3
-					img(src='/images/youdied.jpg' width='475px')
-				div(class='Tile' id='tile007')
-					div(class='thumbnail')
-						img(class='profile_pic' src='/images/cat.jpg')
-					p(class='post_name') Cat
-					p touch tha fishy
-					img(src='/images/touch_the_fishy.gif' width='475px')
+
+				form
+					input(type='text' id='post_msg' placeholder='What are you thinking about?')
+					br
+					input(type='file' id='post_file')
+					button(onclick="post()") Submit
+					script.
+						function post() {
+							var file_name = document.getElementById("post_file").value;
+							var ref= new Firebase("https://techroot.firebaseio.com/category/")
+							var message = {
+								url: "hue",
+								uid: "huehue",
+								caption: document.getElementById("post_msg").value,
+								stats: {
+									likes: 0,
+									timestamp: new Date().getTime()
+								}
+							}
+							ref.push(message);
+						}
+
+	div(class='Wall' id='profile_wall')
+		script.
+
+			var ref= new Firebase("https://techroot.firebaseio.com/category/");
+			ref.on("value",function (snapshot) {
+
+				for( var elem in snapshot.val()){
+					var $node = $("<div class= 'Tile' >" +
+							"<div class= 'thumbnail'>" +
+							"<img class= 'profile_pic' src = '/images/silvio.png'>" +
+							"</div> " +
+							"<p class = 'post_name'>" + "</p>" +
+							"<p>" + snapshot.val()[elem].caption + "</p>" +
+							"<img src = '/images/aviao.jpg'>" +
+							" </div>");
+					console.log(snapshot.val()[elem].uid);
+					var ref2 = new Firebase("https://techroot.firebaseio.com/users/"+snapshot.val()[elem].uid);
+					ref2.on("value",function (snapshot2){
+						$node.children(".post_name").text(snapshot2.val().name);
+						console.log(snapshot2.val().name);
 
 
+					})
+					$("#profile_wall").append($node);
+				}
 
-	script(type='text/javascript' src='https://code.jquery.com/jquery-2.2.3.min.js')
-	script(type='text/javascript' src='javascripts/auth.js')
-	script(type="text/javascript" src="https://cdn.firebase.com/js/client/2.4.2/firebase.js")
+			});
+
+
