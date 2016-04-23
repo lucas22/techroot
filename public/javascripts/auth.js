@@ -3,6 +3,7 @@
  */
 
 // Returns true if required data is ok
+var ref = new Firebase("https://techroot.firebaseio.com/");
 var processForm = function (mail, pw) {
     var confirmPass = $("#confirm_pass");
     ok = true;
@@ -34,14 +35,43 @@ var loginAPI = function (ref, target) {
             return undefined;
         }
         console.log("Authenticated successfully with payload:", authData);
+
+        switch(target){
+            case "google":
+                var provider= "google";
+                var mail = authData.google.email;
+                var name = authData.google.displayName;
+
+                ref.onAuth(function(authData){
+                    ref.child("users").child(authData.uid).set({
+                        provider:provider,
+                        email: mail,
+                        name: name
+                    })
+                })
+
+                break;
+            case "github":
+                var provider= "github";
+                var username = authData.github.username;
+                var name = authData.github.displayName;
+
+                ref.onAuth(function(authData){
+                    ref.child("users").child(authData.uid).set({
+                        provider:provider,
+                        username: username,
+                        name: name
+                    })
+                })
+                break;
+        }
         window.location.href = "/wall"
         return authData;
-    });
+    },
+        {scope: "email"});
 };
 
 $(document).ready(function () {
-
-    var ref = new Firebase("https://techroot.firebaseio.com/");
 
     // Google authentication
     $("#btn_login_google").on("click", function () {
@@ -131,6 +161,7 @@ $(document).ready(function () {
                 password: passwd
             };
 
+
             ref.createUser(user_identification, function (error, userData) {
                 if (error) {
                     switch (error.code) {
@@ -148,8 +179,9 @@ $(document).ready(function () {
                 console.log("Successfully created user account with uid:", userData.uid);
                 var user_info = {
                     email: user_mail,
+                    provider:"password",
                     name: $("#signup_name").val(),
-                    nick: nick,
+                    nick: $("#signup_nick").val(),
                     gender: $("input[name='gender']:checked").val()
                 };
                 ref.child("users").child(userData.uid).set(user_info);

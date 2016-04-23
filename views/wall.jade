@@ -4,9 +4,7 @@ html
 		title= "Wall"
 		link(rel='stylesheet', href='/stylesheets/common.css')
 		link(rel='stylesheet', href='/stylesheets/wall.css')
-		script(type='text/javascript' src='https://code.jquery.com/jquery-2.2.3.min.js')
-		script(type='text/javascript' src='javascripts/auth.js')
-		script(type="text/javascript" src="https://cdn.firebase.com/js/client/2.4.2/firebase.js")
+
 
 	body
 		div(id='wrapper')
@@ -17,49 +15,14 @@ html
 					input(type='text' id='post_msg' placeholder='What are you thinking about?')
 					br
 					input(type='file' id='post_file')
-					button(onclick="post()") Submit
-					script.
-						function post() {
-							var file_name = document.getElementById("post_file").value;
-							var ref= new Firebase("https://techroot.firebaseio.com/category/")
-							var message = {
-								url: "hue",
-								uid: "huehue",
-								caption: document.getElementById("post_msg").value,
-								stats: {
-									likes: 0,
-									timestamp: new Date().getTime()
-								}
-							}
-							ref.push(message);
-						}
-
-	div(class='Wall' id='profile_wall')
-		script.
-
-			var ref= new Firebase("https://techroot.firebaseio.com/category/");
-			ref.on("value",function (snapshot) {
-
-				for( var elem in snapshot.val()){
-					var $node = $("<div class= 'Tile' >" +
-							"<div class= 'thumbnail'>" +
-							"<img class= 'profile_pic' src = '/images/silvio.png'>" +
-							"</div> " +
-							"<p class = 'post_name'>" + "</p>" +
-							"<p>" + snapshot.val()[elem].caption + "</p>" +
-							"<img src = '/images/aviao.jpg'>" +
-							" </div>");
-					console.log(snapshot.val()[elem].uid);
-					var ref2 = new Firebase("https://techroot.firebaseio.com/users/"+snapshot.val()[elem].uid);
-					ref2.on("value",function (snapshot2){
-						$node.children(".post_name").text(snapshot2.val().name);
-						console.log(snapshot2.val().name);
+					input(class='Button', id='submit_post', type="submit", value="")
 
 
-					})
-					$("#profile_wall").append($node);
-				}
+		div(class='Wall' id='profile_wall')
 
-			});
-
+	script(type="text/javascript" src="https://cdn.firebase.com/js/client/2.4.2/firebase.js")
+	script(type='text/javascript' src='https://code.jquery.com/jquery-2.2.3.min.js')
+	script(src="https://apis.google.com/js/platform.js", async defer)
+	script(type='text/javascript' src='javascripts/post.js')
+	script(type='text/javascript' src='javascripts/auth.js')
 
