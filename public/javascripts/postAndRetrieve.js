@@ -93,7 +93,6 @@ $(document).ready(function(){
                 "<div class= 'thumbnail'>" +
                 "<img class= 'profile_pic' src = '/images/silvio.png'>" +
                 "</div> " +
-                "<p class = 'post_name'>" +snapshot.val()[elem].name+ "</p>" +
                 "<p>" + snapshot.val()[elem].caption + "</p>" +
                 "<img src = '/images/aviao.jpg'>" +
                 " </div>");

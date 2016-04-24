@@ -14,10 +14,26 @@ router.get('/profile', function (req, res, next) {
 
 /* GET wall page. */
 router.get('/wall', function (req, res, next) {
-    res.render('wall', {title: 'Wall'});
+    var walk = require('walk');
+    var files = [];
+    var walker = walk.walk('./public/uploads', {followLinks: false});
+
+    // gets all filenames in path
+    walker.on('file', function (root, stat, next) {
+        // Add this file to the list of files
+        files.push(stat.name);
+        next();
+    });
+
+    walker.on('end', function () {
+        //console.log("FILES: " + files);
+        res.render('wall', {files: files});
+    });
+
 });
 
-router.post('/', multer({dest: './uploads/'}).single('upl'), function (req, res) {
+/* POST uploads */
+router.post('/wall/', multer({dest: './public/uploads/'}).single('upl'), function (req, res) {
     console.log(req.body); //form fields
     console.log(req.file.filename); //form files
 
@@ -33,6 +49,26 @@ router.post('/', multer({dest: './uploads/'}).single('upl'), function (req, res)
     //  | | | |__stats      # statistics of post (e.g.: #of ++(likes) )
 
     res.status(204).end();
+});
+
+/* GET uploads */
+router.get('/uploads/', function (req, res, next) {
+    var fs = require('fs');
+    console.log("REQ: " + req.toString());
+    console.log("RES: " + res.toString());
+    fs.realpath(__dirname, function (err, path) {
+        if (err) {
+            console.log(err);
+            return;
+        }
+        console.log('Path is : ' + path);
+    });
+    fs.readdir(__dirname, function (err, files) {
+        if (err) return;
+        files.forEach(function (f) {
+            console.log('Files: ' + f);
+        });
+    });
 });
 
 module.exports = router;
