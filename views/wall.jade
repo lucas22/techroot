@@ -5,20 +5,22 @@ html
 		link(rel='stylesheet', href='/stylesheets/common.css')
 		link(rel='stylesheet', href='/stylesheets/wall.css')
 
-
 	body
 		div(id='wrapper')
+
+			// Wall header
 			div(class='Box_wall' id='profile_header')
-				h1(id="profile_name") Sílvio Santos
+				h1(id="profile_name") The Wall
+				form(id="uploadForm" action='/wall/', method='post', enctype='multipart/form-data')
+					input(type='file', name='upl')
+					input(class='Button', type='submit', value="Upload!" name="submit")
 
-				form
-					input(type='text' id='post_msg' placeholder='What are you thinking about?')
-					br
-					input(type='file' id='post_file')
-					input(class='Button', id='submit_post', type="submit", value="")
-
-
-		div(class='Wall' id='profile_wall')
+			// Wall dynamic construction
+			div(class='Wall' id='profile_wall')
+				each f in files
+					div(class='Tile' id='tile000')
+						p Image name: #{f}
+						img(src='uploads/' + f).Wallpic
 
 	script(type="text/javascript" src="https://cdn.firebase.com/js/client/2.4.2/firebase.js")
 	script(type='text/javascript' src='https://code.jquery.com/jquery-2.2.3.min.js')
