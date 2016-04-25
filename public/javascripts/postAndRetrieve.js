@@ -91,7 +91,7 @@ $(document).ready(function(){
             console.log("desespero"+elem)
             var $node = $("<div class= 'Tile' >" +
                 "<div class= 'thumbnail'>" +
-                "<img class= 'profile_pic' src = '/images/silvio.png'>" +
+                
                 "</div> " +
                 "<p>" + snapshot.val()[elem].caption + "</p>" +
                 "<img src = '/images/aviao.jpg'>" +
