@@ -1,4 +1,3 @@
-
 doctype html
 html
 	head
@@ -6,6 +5,9 @@ html
 		link(rel='stylesheet', href='/stylesheets/common.css')
 		link(rel='stylesheet', href='/stylesheets/wall.css')
 
+	script(type="text/javascript" src="https://cdn.firebase.com/js/client/2.4.2/firebase.js")
+	script(type='text/javascript' src='https://code.jquery.com/jquery-2.2.3.min.js')
+	script(type='text/javascript' src='javascripts/wall_builder.js')
 
 	body
 		div(id='wrapper')
@@ -22,19 +24,8 @@ html
 
 			// Wall dynamic construction
 			div(class='Wall' id='profile_wall')
-				each f in files
-					div(class='Tile' id='tile000')
-						p Image name: #{f}
-						img(src='uploads/' + f).Wallpic
+				script.
+					wall_builder("#{files}");
 
-	script(type="text/javascript" src="https://cdn.firebase.com/js/client/2.4.2/firebase.js")
-	script(type='text/javascript' src='https://code.jquery.com/jquery-2.2.3.min.js')
 	script(type='text/javascript' src='javascripts/set_auth_info.js')
 	script(src="https://apis.google.com/js/platform.js", async defer)
-
-	//script(type='text/javascript' src='javascripts/auth.js')
-
-
-
-
-

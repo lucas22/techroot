@@ -45,10 +45,10 @@ body {
 }
 
 .post_name {
-    padding: 0.9em;
+    padding: 0.1em;
     font-size: x-large;
     font-family: "Ubuntu", sans-serif;
-    color: blue;
+    color: #444;
 }
 
 .profile_pic {

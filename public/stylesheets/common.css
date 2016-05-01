@@ -74,6 +74,17 @@
     width: 15%;
 }
 
+.pplus {
+    background-color: #eee;
+    width: 40px;
+    text-align: center;
+    border-radius: 5px;
+    color: #00A000;
+    font-family: "Courier New", sans-serif;
+    font-weight: bold;
+    padding: 0.2em;
+}
+
 .Tile p {
     text-align: left;
     margin: 3%;
