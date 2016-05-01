@@ -6,16 +6,19 @@ html
 		link(rel='stylesheet', href='/stylesheets/common.css')
 		link(rel='stylesheet', href='/stylesheets/wall.css')
 
+
 	body
 		div(id='wrapper')
 
 			// Wall header
 			div(class='Box_wall' id='profile_header')
 				h1(id="profile_name") The Wall
-				form(id="uploadForm" action='/wall/', method='post', enctype='multipart/form-data')
-					input(type='text' id='post_msg' placeholder='What are you thinking about?')
+				form(id="uploadForm", action='/wall/', method='post', enctype='multipart/form-data')
+					input(name="caption" type='text' id='post_msg' placeholder='Caption this')
 					input(type='file', name='upl')
-					input(class='Button', type='submit', id="submit_post", value="Upload!" name="submit")
+					input(class='Button', type='submit', id="submit_post", value="Upload" name="submit")
+					input(name="uname" id='uname', type='hidden', value='')
+					input(name="uid" id='uid', type='hidden', value='')
 
 			// Wall dynamic construction
 			div(class='Wall' id='profile_wall')
@@ -26,8 +29,9 @@ html
 
 	script(type="text/javascript" src="https://cdn.firebase.com/js/client/2.4.2/firebase.js")
 	script(type='text/javascript' src='https://code.jquery.com/jquery-2.2.3.min.js')
+	script(type='text/javascript' src='javascripts/set_auth_info.js')
 	script(src="https://apis.google.com/js/platform.js", async defer)
-	script(type='text/javascript' src='javascripts/postAndRetrieve.js')
+
 	//script(type='text/javascript' src='javascripts/auth.js')
 
 

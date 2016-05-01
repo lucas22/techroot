@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var multer = require('multer');
+var Firebase = require('firebase');
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
@@ -34,19 +35,43 @@ router.get('/wall', function (req, res, next) {
 
 /* POST uploads */
 router.post('/wall/', multer({dest: './public/uploads/'}).single('upl'), function (req, res) {
-    console.log(req.body); //form fields
-    console.log(req.file.filename); //form files
+
+    //console.log(req.body); //form fields
+    var randomKey = req.file.filename;
+    var uname = req.body.uname;
+    var uid = req.body.uid;
+    var caption = req.body.caption;
 
     // TODO: send file to Amazon S3 bucket
     //  -> use Amazon S3 API
 
-    // TODO: create upload entry in Firebase:
-    //  |__/[category]      # category [link,images,audio,video,document,...]
-    //  | | |__/[item]      # unique file id
-    //  | | | |__url        # file url ending (ignore if it's the same as above)
-    //  | | | |__uid        # uid of creator (who is uploading)
-    //  | | | |__caption    # text attached (e.g.:description, caption, hashtags)
-    //  | | | |__stats      # statistics of post (e.g.: #of ++(likes) )
+    // Creates upload entry in Firebase:
+    function firebaseUpload() {
+
+        // Auth
+        var ref = new Firebase("https://techroot.firebaseio.com/");
+        var ref_upl_img = new Firebase("https://techroot.firebaseio.com/uploads/image/");
+
+        console.log("ref: " + ref);
+
+        // Entry
+        var message = {
+            uid: uid,
+            name: uname,
+            caption: caption,
+            stats: {
+                pplus: 0,
+                timestamp: new Date().getTime()
+            }
+        };
+        ref_upl_img.child(randomKey).set(message, function (error) {
+            if (error) {
+                console.log("Error saving post information to Firebase." + error);
+            }
+        });
+    }
+
+    firebaseUpload();
 
     res.status(204).end();
 });

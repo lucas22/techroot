@@ -36,11 +36,12 @@ var loginAPI = function (ref, target) {
         }
         console.log("Authenticated successfully with payload:", authData);
 
+            var provider, mail, name, username;
         switch(target){
             case "google":
-                var provider= "google";
-                var mail = authData.google.email;
-                var name = authData.google.displayName;
+                provider = "google";
+                mail = authData.google.email;
+                name = authData.google.displayName;
 
                 ref.onAuth(function(authData){
                     ref.child("users").child(authData.uid).set({
@@ -48,13 +49,13 @@ var loginAPI = function (ref, target) {
                         email: mail,
                         name: name
                     })
-                })
+                });
 
                 break;
             case "github":
-                var provider= "github";
-                var username = authData.github.username;
-                var name = authData.github.displayName;
+                provider = "github";
+                username = authData.github.username;
+                name = authData.github.displayName;
 
                 ref.onAuth(function(authData){
                     ref.child("users").child(authData.uid).set({
@@ -62,10 +63,10 @@ var loginAPI = function (ref, target) {
                         username: username,
                         name: name
                     })
-                })
+                });
                 break;
         }
-        window.location.href = "/wall"
+            window.location.href = "/wall";
         return authData;
     },
         {scope: "email"});
@@ -152,9 +153,8 @@ $(document).ready(function () {
                 return false;
             }
 
-            // TODO: test this statement:
-            var nick = $("#signup_nick").val() | "";
-            console.log("NICK: " + nick + " EON");
+            var nick = $("#signup_nick").val() || "";
+            console.log("NICK: " + nick);
 
             var user_identification = {
                 email: user_mail,
