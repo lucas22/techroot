@@ -185,7 +185,7 @@ $(document).ready(function () {
                     gender: $("input[name='gender']:checked").val()
                 };
                 ref.child("users").child(userData.uid).set(user_info);
-                window.location.href = "/profile";
+                window.location.href = "/wall";
                 return userData;
             });
 
