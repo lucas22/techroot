@@ -70,5 +70,11 @@ body {
 }
 
 .Wallvid {
-    width: 95%
+    width: 95%;
+}
+
+
+#logout{
+float: right;
+    top:0;
 }

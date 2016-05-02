@@ -32,4 +32,10 @@ $(document).ready(function () {
     $('#uid').val(uid);
 
     console.log("Name / UID: " + uname + " / " + uid);
+    
+    $("#logout").click(function(){
+        ref.unauth();
+        //console.log(ref.getAuth().uid)
+        window.location="/"
+    })
 });

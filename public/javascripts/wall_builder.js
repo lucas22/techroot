@@ -3,7 +3,6 @@
  */
 
 
-
 // Dynamically builds the Wall content
 var wall_builder = function (files) {
     files = files.split(',');
@@ -20,8 +19,8 @@ var wall_builder = function (files) {
 
         for (f in files) {
             var values = snapshop.val();
-            console.log(values)
-            console.log(values[files[f]])
+            //console.log(values)
+            //console.log(values[files[f]])
             if (values[files[f]]) {
 
                 var caption = values[files[f]].caption;      // caption in Firebase
